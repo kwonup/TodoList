@@ -43,26 +43,24 @@ function App() {
     // targetId와 일치하는 id를 갖는 투두 아이템의 isDone 변경
 
     // 인수: todos배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
-    // setTodos(
-    //   todos.map((todo) => {
-    //     if (todo.id === targetId) {
-    //       return { ...todo, isDone: !todo.isDone };
-    //     }
-    //     return todo;
-    //   })
-    // );
-
     setTodos(
       todos.map((todo) =>
         todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
       )
     );
   };
+
+  const onDelete = (targetId) => {
+    setTodos(
+      //filter : 조건에 맞는것만 남기는 함수
+      todos.filter((todo) => todo.id !== targetId)
+    );
+  };
   return (
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
